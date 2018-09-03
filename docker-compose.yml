@@ -1,0 +1,28 @@
+version: '2'
+services:
+  sql1:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=1
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      - mysql-network
+
+
+  admin1:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=1
+      - PMA_HOST=sql1
+      - PMA_PORT=3306
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+
