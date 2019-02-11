@@ -14,7 +14,7 @@
 
 *--net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system.*
 
-###### Check that you have a working install docker :
+##### Check that you have a working install docker :
 ###### $ docker info
 
 ##### Create containers on the host network
