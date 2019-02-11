@@ -17,7 +17,7 @@
 ###### Check that you have a working install docker :
 ###### $ docker info
 
-###### Create containers on the host network
+##### Create containers on the host network
 ###### $ docker run -itd --net host --name C1 alpine sh 
 	-d detached mode: run container in the background 
 	-t allocate a pseudo TTY
@@ -28,5 +28,6 @@
 ###### $ docker inspect C1
 ###### $ docker exec -it C1 sh ( connect to container shell)
 ###### $ docker exec -it C1 sh -c "hostname && ip a && cat /etc/resolv.conf" ( run bash command on container)
-	*In this example, the host C1 and C1 all share the same interface  when containers use the host network.*
-	*The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.*
+
+*In this example, the host C1 and C1 all share the same interface  when containers use the host network.*
+*The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.*
