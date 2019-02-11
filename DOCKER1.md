@@ -1,4 +1,4 @@
-## Docker Network Drivers
+## Docker Networking Drivers
 
 [Docker Networking](https://success.docker.com/article/networking)
 
@@ -10,7 +10,7 @@
 
 **Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking.**
 
-#### Host driver
+#### ===== Host driver =====
 
 *--net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system.*
 
