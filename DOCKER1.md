@@ -26,6 +26,7 @@
 
 **Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking.**
 
+....
 #### ---------- Host driver -------------
 
 * --net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system. *
@@ -50,23 +51,25 @@
 *The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.*
 
 
-#### --------- Bridge driver -------------
+....
+##### --------- Bridge driver -------------
 
 Bridge network driver which instantiates a Linux bridge called docker0.
+
+##### Default Docker Bridge Network
+
+The default __bridge__ network is the only network that supports legacy links. Name-based service discovery and user-provided IP addresses are **not** supported by the default **bridge** network.
 
 ###### $ docker run -it --name c1 busybox sh { Create a busybox container named "c1" and show its IP addresses }
 ###### $ brctl show 
 	The tool brctl on the host shows the Linux bridges that exist in the host networas assigned one subnet from the ranges 172.[17-31].0.0/16 or 192.168.[0-240].0/20 which does not overlap with any existing host interface. 
 
+##### User-Defined Bridge Network
+
 ##### Unlike the default bridge network, user-defined networks supports manual IP address and subnet assignment. 
 
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
 
-###### $ docker network ls
-
-
-
-=======
 ###### $ docker network ls { show all network interfaces }
 	container has network connectivity to all intefaces on host
 
@@ -87,6 +90,20 @@ c1 has connectivity to host but doesn't connectivity to c2
 ###### $ docker run -d --name C2 --net my_bridge -p 5000:80 nginx  { All traffic going to this ip_address:5000 is port published to ip_address:80 of the container interface.}
 	-p short form --publish
 
+....
+#### ------------------ Overlay Driver Network Architecture
 
+VXLAN is typically deployed in data centers on virtualized hosts, which may
+be spread across multiple racks.
+
+IETF VXLAN (RFC 7348) is a data-layer encapsulation format that overlays Layer 2 segments over Layer 3 networks.
+
+	Create an overlay named "ovnet" with the overlay driver
+
+###### $ docker network create -d overlay --subnet 10.1.0.0/24 ovnet
+
+	Create a service from an nginx image and connect it to the "ovnet" overlay network
+
+###### $ docker service create --network ovnet nginx
 
 
