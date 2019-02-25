@@ -14,7 +14,8 @@
 	* overlay 
 	* none 
 
-#### Network driver summary
+#### Network driver summary <https://docs.docker.com/network>
+
 
   * __User-defined__ bridge networks are best when you need multiple containers to communicate on the same Docker host.
   * **Host networks** are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.
@@ -23,16 +24,16 @@
   * **Third-party network plugins** allow you to integrate Docker with specialized network stacks.
 
 
-** Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking. **
+**Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking.**
 
-#### Host driver
+#### ---------- Host driver -------------
 
 * --net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system. *
 
-###### Check that you have a working install docker :
+	Check that you have a working install docker :
 ###### $ docker info
 
-###### Create containers on the host network
+	Create containers on the host network
 ###### $ docker run -itd --net host --name C1 alpine sh 
 	-d detached mode: run container in the background 
 	-t allocate a pseudo TTY
@@ -60,7 +61,7 @@ Bridge network driver which instantiates a Linux bridge called docker0.
 ##### Unlike the default bridge network, user-defined networks supports manual IP address and subnet assignment. 
 
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
-<<<<<<< HEAD
+
 ###### $ docker network ls
 
 
@@ -69,7 +70,8 @@ Bridge network driver which instantiates a Linux bridge called docker0.
 ###### $ docker network ls { show all network interfaces }
 	container has network connectivity to all intefaces on host
 
-For new custom network you should run new container
+	For new custom network you should run new container
+
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
 ###### $ docker run -itd --name c2 --net my_bridge busybox sh
 ###### $ docker run -itd --name c3 --net my_bridge --ip 10.0.0.254 busybox sh
