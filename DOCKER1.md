@@ -26,11 +26,9 @@
 
 **Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking.**
 
--------
 
-<dl> 
-<center> HOST Driver 
-</dl>
+## HOST Driver 
+
 
 * --net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system. *
 
@@ -54,8 +52,7 @@
 *The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.*
 
 
------
-##### --------- Bridge driver -------------
+## BRIDGE Driver 
 
 Bridge network driver which instantiates a Linux bridge called docker0.
 
@@ -93,8 +90,8 @@ c1 has connectivity to host but doesn't connectivity to c2
 ###### $ docker run -d --name C2 --net my_bridge -p 5000:80 nginx  { All traffic going to this ip_address:5000 is port published to ip_address:80 of the container interface.}
 	-p short form --publish
 
-------
-#### ------------------ Overlay Driver Network Architecture
+
+## OVERLAY Driver Network Architecture
 
 VXLAN is typically deployed in data centers on virtualized hosts, which may
 be spread across multiple racks.
@@ -109,8 +106,8 @@ IETF VXLAN (RFC 7348) is a data-layer encapsulation format that overlays Layer 2
 
 ###### $ docker service create --network ovnet nginx
 
--------
-#### ----------------------- MACVLAN --------------------------
+
+## MACVLAN Driver
 
 The MACVLAN driver provides direct access between containers and the physical network ( w/o the port mapping ).
 MACVLAN use-cases may include:
