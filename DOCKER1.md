@@ -28,7 +28,9 @@
 
 -------
 
+<dl> 
 <center> HOST Driver 
+</dl>
 
 * --net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system. *
 
