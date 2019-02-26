@@ -26,7 +26,7 @@
 
 **Docker networking uses the kernel's networking stack as low level primitives to create higher level network drivers. Simply put, Docker networking is Linux networking.**
 
-....
+-------
 #### ---------- Host driver -------------
 
 * --net=host effectively turns Docker networking off and containers use the host (or default) networking stack of the host operating system. *
@@ -51,7 +51,7 @@
 *The traffic path goes directly from the container process to the host interface, offering bare-metal performance that is equivalent to a non-containerized process.*
 
 
-....
+-----
 ##### --------- Bridge driver -------------
 
 Bridge network driver which instantiates a Linux bridge called docker0.
@@ -90,7 +90,7 @@ c1 has connectivity to host but doesn't connectivity to c2
 ###### $ docker run -d --name C2 --net my_bridge -p 5000:80 nginx  { All traffic going to this ip_address:5000 is port published to ip_address:80 of the container interface.}
 	-p short form --publish
 
-....
+------
 #### ------------------ Overlay Driver Network Architecture
 
 VXLAN is typically deployed in data centers on virtualized hosts, which may
@@ -106,4 +106,22 @@ IETF VXLAN (RFC 7348) is a data-layer encapsulation format that overlays Layer 2
 
 ###### $ docker service create --network ovnet nginx
 
+-------
+#### ----------------------- MACVLAN --------------------------
+
+The MACVLAN driver provides direct access between containers and the physical network ( w/o the port mapping ).
+MACVLAN use-cases may include:
+  * Very low-latency application
+  * Network design that requres containers be on the same subnet as and using IPs as the external host network.
+
+Trunking 802.1q to a Linux requires cinfiguration file changes in order to be persistent through a reboot.
+
+	Creation of MACVLAN network "mvnet" bound to eth0 on the host
+###### $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 mvnet
+
+### MACVLAN Benefits and Use Cases
+
+  * Very low latency applications can benefit from the macvlan driver because it does not utilize NAT.
+  * MACVLAN can provide an IP per container, which may be a requirement in some environments.
+  * More careful consideration for IPAM must be taken in to account.
 
