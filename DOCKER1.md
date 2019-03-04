@@ -66,7 +66,7 @@ The default __bridge__ network is the only network that supports legacy links. N
 
 ##### User-Defined Bridge Network
 
-##### Unlike the default bridge network, user-defined networks supports manual IP address and subnet assignment. 
+##### **Unlike the default bridge network, user-defined networks supports manual IP address and subnet assignment.**
 
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
 
@@ -124,4 +124,14 @@ Trunking 802.1q to a Linux requires cinfiguration file changes in order to be pe
   * Very low latency applications can benefit from the macvlan driver because it does not utilize NAT.
   * MACVLAN can provide an IP per container, which may be a requirement in some environments.
   * More careful consideration for IPAM must be taken in to account.
+
+
+
+## None (Isolated) Network Driver
+
+**Docker Engine does not create interfaces inside the container, establish port mapping, or install routes for connectivity. A container using --net=none is completely isolated from other containers and the host.**
+
+	Containers using --net=none or --net=host cannot be connected to any other Docker networks.
+
+
 
