@@ -1,6 +1,6 @@
-** Install Docker CE
+**Install Docker CE**
 
-*** Uninstall any old version of Docker
+***Uninstall any old version of Docker***
 
 sudo yum remove -y docker \
 		   docker-client \
@@ -14,7 +14,7 @@ sudo yum remove -y docker \
 		   docker-engine
 
 
-*** Install Docker
+***Install Docker***
 
 1. Install required packages
 
