@@ -70,9 +70,14 @@ The default __bridge__ network is the only network that supports legacy links. N
 
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
 
-###### $ docker network ls { show all network interfaces }
-	container has network connectivity to all intefaces on host
+**Container can be attached and detached from user-defined network on the fly.**
+During container's lifetime , you can connect or disconnect it from user-defined networks on the fly. To remove a container from the default bridge network. you need to stop the container and recreate it with different network option.
 
+###### $ docker network connect my-net my-nginx
+###### $ docker network disconnect my-net my-nginx
+###### $ docker network ls { show all network interfaces }
+	
+	container has network connectivity to all intefaces on host
 	For new custom network you should run new container
 
 ###### $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
