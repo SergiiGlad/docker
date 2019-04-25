@@ -41,34 +41,38 @@ No one is perfect - There is a perfectly wonderful code.
 
 #### Processes
 
- $ docker run -d --name=db redis:alpine
- $ ps aux | grep redis-server
- ```$ docker top db```
- $ ps aux | grep <PPID>
- $ pstree -c -p -A $(pgrep dockerd)
+ ###### $ docker run -d --name=db redis:alpine
+ 
+ ###### $ ps aux | grep redis-server
+ 
+ ###### $ docker top db
+ 
+ ###### $ ps aux | grep <PPID>
+ 
+ ###### $ pstree -c -p -A $(pgrep dockerd)
 
 #### Process Directory
 
- $ DBPID=$(pgrep redis-server)
- ``` $ ls /proc/$DBPID```
- ``` $ cat /proc/$DBPID/environ```
+ ###### $ DBPID=$(pgrep redis-server)
+ ###### $ ls /proc/$DBPID
+ ###### $ cat /proc/$DBPID/environ
 
-####Namespaces
+#### Namespaces
 
  List all the namespaces with:
- ```ls -lha /proc/$DBPID/ns/```
+ ###### ls -lha /proc/$DBPID/ns/
 
-####Cgroup (Control Groups)
- ``` cat /proc/$DBPID/cgroup```
- $ cat /sys/fs/cgroup/cpu,cpuacct/docker/$DBPID/cpu.shares
- $ ls /sys/fs/cgroup/memory/docker/$DBPID
+#### Cgroup (Control Groups)
+ ###### $ cat /proc/$DBPID/cgroup
+ ###### $ cat /sys/fs/cgroup/cpu,cpuacct/docker/$DBPID/cpu.shares
+ ###### $ ls /sys/fs/cgroup/memory/docker/$DBPID
 
-####Capabilities
+#### Capabilities
 
 Capabilities are grouping about what a process or user has permission to do.
- $ cat /proc/$DBPID/status | grep ^Cap
+ ###### $ cat /proc/$DBPID/status | grep ^Cap
 
-
+## DOCKER SWARM
 
 By default, Docker works as an isolated single-node. All containers are only deployed onto the engine. Swarm Mode turns it into a multi-host cluster-aware engine. ``` docker swarm init ```
 
