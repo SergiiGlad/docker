@@ -71,6 +71,12 @@ No one is perfect - There is a perfectly wonderful code.
 
 Capabilities are grouping about what a process or user has permission to do.
  ###### $ cat /proc/$DBPID/status | grep ^Cap
+ 
+ ### Unshare can launch "contained" processes.
+ 
+ ###### $ unshare --help
+ 
+ https://www.katacoda.com/courses/containers-without-docker/what-is-a-container
 
 ## DOCKER SWARM
 
