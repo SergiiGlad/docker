@@ -70,10 +70,6 @@ Capabilities are grouping about what a process or user has permission to do.
 
 
 
-
- 
-
-
 By default, Docker works as an isolated single-node. All containers are only deployed onto the engine. Swarm Mode turns it into a multi-host cluster-aware engine. ``` docker swarm init ```
 
 ###### $ docker swarm join-token -q worker { ask token }
