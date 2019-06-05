@@ -1,3 +1,8 @@
+## Registries
+
+#### Fedora Registry
+
+ * Click: [registry.fedoraproject.org](registry.fedoraproject.org)
 
 ## DOCKER SWARM
 
