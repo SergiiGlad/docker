@@ -97,3 +97,22 @@ Chroot provides the ability for a process to start with a different root directo
  
  https://www.katacoda.com/courses/containers-without-docker/what-is-a-container
 Docker
+
+## Setting up a limit with the memory cgroup
+
+Create a new memory cgroup:
+```
+$ CG=/sys/fs/cgroup/memory/onehundredmegs
+$ sudo mkdir $CG
+```
+Limit it approximately 100 MB of memory usage:
+```
+$ sudo tee $CG/memory.memsw.limit_in_bytes <<< 100000000
+```
+Move the current process to that cgroup:
+```
+$ sudo tee $CG/tasks <<< $$
+```
+The current process and all its future children are now limited.
+
+

@@ -50,16 +50,15 @@ $ weave status
 
 
 
-## Finding the web server port in a script
-```
-$ docker port <containerID> 80
-32456
-```
+#### Finding the web server port in a script
 
-## Finding the container's IP address
+###### $ docker port <containerID> 80
 
-```
-$ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
-172.17.0.3
-```
+#### Finding the container's IP address
+
+###### $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
+
+#### on the host, get the container's PID:
+
+###### $ docker inspect --format {{.State.Pid}} <container_name_or_ID>
 
