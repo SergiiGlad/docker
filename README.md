@@ -9,4 +9,4 @@
 ![alt text](containers.png)
 
 ## learn.openshift.com
-![learn.openshift.com](Linux Container Internals 2.0.pdf)
+![alt text](Linux Container Internals 2.0.pdf)
