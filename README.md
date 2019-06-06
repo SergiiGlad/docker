@@ -9,4 +9,4 @@
 ![alt text](containers.png)
 
 ## learn.openshift.com
-![alt text](https://github.com/SergiiGlad/docker/blob/master/Linux%20Container%20Internals%202.0.pdf)
+[learn.openshift.com](https://github.com/SergiiGlad/docker/blob/master/Linux%20Container%20Internals%202.0.pdf)
