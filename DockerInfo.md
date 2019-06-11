@@ -1,8 +1,21 @@
 ## Registries
 
-#### Fedora Registry
+#### Registry servers
 
  * Click: [registry.fedoraproject.org](http://registry.fedoraproject.org)
+
+ * Click: [bitnami.com/containers](http://bitnami.com/containers)
+
+ * Click: [access.redhat.com/containers](https://access.redhat.com/containers)
+
+#### Container Enginers cache Repositories on the container host
+
+There is a little known or understood fact - whenever you pull a container image, each layer is cached locally, mapped into a shared filesystem - typically ```overlay2``` or ```devicemapper```.
+
+###### $ docker info 2>&1 | grep -E 'Storage | Root'
+
+###### $ tree /var/lib/docker/	
+
 
 ## DOCKER SWARM
 
