@@ -4,15 +4,15 @@ https://docs.docker.com/engine/reference/run/
 
 
 ## Network settings
-
+  
    --dns=[]           : Set custom dns servers for the container
    ---
    --network="bridge" : Connect a container to a network
-                      * 'bridge': create a network stack on the default Docker bridge
-                      * 'none': no networking
-                      * 'container:<name|id>': reuse another container's network stack
-                      * 'host': use the Docker host network stack
-                      * '<network-name>|<network-id>': connect to a user-defined network
+   * 'bridge': create a network stack on the default Docker bridge
+   * 'none': no networking
+   * 'container:<name|id>': reuse another container's network stack
+   * 'host': use the Docker host network stack
+   * '<network-name>|<network-id>': connect to a user-defined network
    ---
    --network-alias=[] : Add network-scoped alias for the container
    ---
