@@ -18,5 +18,6 @@ docker command | desc
 `docker run username/repository:tag  `         |        # Run image from a registry
 `docker run -ti --rm --pid=host myhtop`         |        # Join host namespace to htop
 `docker run -ti --rm --pid=container:rhel myhtop  `   | # Join another container's pid namespace can be used for debugging that container
+  `docker run -ti --rm --uts="host" alpine hostname  `         |        # Setting the hostname and the domain that is visible to running process
 
 
