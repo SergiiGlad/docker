@@ -10,3 +10,10 @@
 
 ## learn.openshift.com
 [Linux Container Internal PDF from learn.openshift.com](https://github.com/SergiiGlad/docker/blob/master/Linux%20Container%20Internals%202.0.pdf)
+
+## The History of Containers
+![alt text](history.png)
+
+## Container Innovation is not finished
+![alt text](innovation.png)
+
