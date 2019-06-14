@@ -26,7 +26,19 @@ Exercises
 
 ## Runtime metrics
 
-$ docker stats { live stream a container's runtime metrics }
+
+### Collect Docker metrics via pseudo-file
+
+###### $ cat /sys/fs/cgroup/cpuacct/docker/$CONTAINER_ID/cpuacct.stat
+
+#### Network pseudo-file
+
+###### $ CONTAINER_PID=`docker inspect -f '{{ .State.Pid }}' $CONTAINER_ID`
+###### $ cat /proc/$CONTAINER_PID/net/dev   
+
+### Stats command
+
+###### $ docker stats { live stream a container's runtime metrics }
 
 ``` /sys/fs/cgroup ``` Control groups are exposed through a pseudo-filesystem.
 
@@ -35,6 +47,11 @@ $ grep cgroup /proc/mounts { To figure out where your control groups are mounted
 ``` /proc/<pid>/cgroup ``` which control groups a process belongs to
 
 ``` /sys/fs/cgroup/memory/docker/<longid>/ ``` the memory metrics for a Docker container ID
+
+### API
+
+The daemon listens on ```unix:///var/run/docker.sock``` to allow only local connections by the root user. 
+
 
 ## Docker plugins
 
