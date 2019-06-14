@@ -1,7 +1,5 @@
 
-_Tell me and I forget_
-_Teach me and I remember_
-_Involve me and I learn_
+### _Tell me and I forget_ _Teach me and I remember_ _Involve me and I learn_
 	
 _Benjamin Franklin_
 (Probably inspired by Chinese Confucian philosopher Xunzi)
