@@ -3,7 +3,7 @@
 *Teach me and I remember*
 *Involve me and I learn*
 	
-	*Benjamin Franklin*
+*Benjamin Franklin*
 (Probably inspired by Chinese Confucian philosopher Xunzi)
 
 
