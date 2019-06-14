@@ -22,6 +22,7 @@ docker command | desc
 `docker inspect -f "{{.State.StartedAt}}" my-container `         |  last timr the container was (re)started
 `docker run --restart=always redis `         |  Always restart the container regardless of the exit status
 `docker run --security-opt no-new-privileges -it centos bash `         |  raise privileges as su and sudo will no longer work
+ `docker run -it -m 100M --oom-kill-disable ubuntu:14.04 /bin/bash `         |  limits the memory to 100M and disables the OOM killer
  
   
 
