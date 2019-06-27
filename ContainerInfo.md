@@ -27,11 +27,19 @@ No one is perfect - There is a perfectly wonderful code.
 
 ## Linux Namespaces
 
-  * > PID, Process ID
-  * > NET, Networking
-  * > PC, InterProcess Communication
-  * > MNT, Mount
-  * > UTS, Unix Timesharing System
+https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md
+
+type are supported:
+
+  * PID, Process ID - processes inside the container will only be able to see other processes inside the same container or inside the same pid namespace
+  * NET, Networking  - the container will have its own network stack 
+  * IPC, InterProcess Communication - processes inside the conatiner will only be able to communicate to other processes inside the same container via system level IPC
+  * MNT, Mount - the container will have an isolated mount table
+  * UTS, Unix Timesharing System - the container will be able to have its own hostname and domain name
+  * USER - the conatiner will be able to remap user and group IDs from the host to local users and groups within the container
+  * CGROUP - the container will have an isolated view of the cgroup hierarchy
+
+path - namespace file
 
 ## Capabilities
 
