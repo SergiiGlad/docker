@@ -1,4 +1,11 @@
+The term "containers" is heavily overused. Also, depending on the context, it can mean different things to different people.
 
+__Traditional Linux containers are really just ordinary processes on a Linux system.__
+
+These groups of processes are isolated from other groups of processes using resource constraints (control groups [cgroups]),
+Linux security constraints (Unix permissions, capabilities, SELinux, AppArmor, seccomp, etc), and namespaces (PID,network,mount, etc)
+
+[Containers guide](https://opensource.com/article/18/8/sysadmins-guide-containers)
 
 ## Application Container Engine
 
