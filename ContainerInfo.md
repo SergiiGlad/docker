@@ -1,3 +1,7 @@
+## Containers
+
+One of the most common misconceptions about containers is that they act as light virtual machine (VMs). But containers are much more loghtweight than virtual machines: more flexible, scalable and easier to use.
+
 The term "containers" is heavily overused. Also, depending on the context, it can mean different things to different people.
 
 __Traditional Linux containers are really just ordinary processes on a Linux system.__
@@ -9,7 +13,9 @@ Linux security constraints (Unix permissions, capabilities, SELinux, AppArmor, s
 
 ## Application Container Engine
 
-No one is perfect - There is a perfectly wonderful code.
+No one is perfect - There is a perfectly wonderful code. 
+
+One of the best examples of recognizable container software is Docker.
 
 
   * __Dependencies__: Developers rarely write every bit of code that makes up their application. More often they leverage code or even other applications written by other developers. Examples of this include something as simple as "importing" a module or library into code to simplify a complex task like time/date manipulation to a web developers need for a web server to host their web application. Everything an application needs outside of the code the developer directly writes is a "dependency".
