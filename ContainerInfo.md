@@ -62,6 +62,20 @@ path - namespace file
 ## Capabilities
 
   * man 7 capabilities
+  
+## Take a look
+
+So, if you define a container as a process with resource constraints, Linux security constraints, and namespaces, by definition every process on a Linux system is in a container. This is why we often say __Linux is containers, containers are Linux__
+
+Path | Descriptions
+--- | ---
+/proc/PID/cgroup | that the process is in cgroup
+/proc/PID/status | you see capabilities
+/proc/self/attr/current | SELinux labels
+/proc/PID/ns | the list of namespaces the process is in
+
+  
+  
 
 ## Waht is a container?
 
