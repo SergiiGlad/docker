@@ -1,8 +1,21 @@
+## Containers
 
+One of the most common misconceptions about containers is that they act as light virtual machine (VMs). But containers are much more loghtweight than virtual machines: more flexible, scalable and easier to use.
+
+The term "containers" is heavily overused. Also, depending on the context, it can mean different things to different people.
+
+__Traditional Linux containers are really just ordinary processes on a Linux system.__
+
+These groups of processes are isolated from other groups of processes using resource constraints (control groups [cgroups]),
+Linux security constraints (Unix permissions, capabilities, SELinux, AppArmor, seccomp, etc), and namespaces (PID,network,mount, etc)
+
+[Containers guide](https://opensource.com/article/18/8/sysadmins-guide-containers)
 
 ## Application Container Engine
 
-No one is perfect - There is a perfectly wonderful code.
+No one is perfect - There is a perfectly wonderful code. 
+
+One of the best examples of recognizable container software is Docker.
 
 
   * __Dependencies__: Developers rarely write every bit of code that makes up their application. More often they leverage code or even other applications written by other developers. Examples of this include something as simple as "importing" a module or library into code to simplify a complex task like time/date manipulation to a web developers need for a web server to host their web application. Everything an application needs outside of the code the developer directly writes is a "dependency".
@@ -10,32 +23,59 @@ No one is perfect - There is a perfectly wonderful code.
   * __Isolated__: When running, each application should be contained within it's own execution space and not have access to, or be impacted by, other applications running. The reasons for this include security concerns as well as application stability and conflict isolation.
   * __Host Platform__: Like virtual machines, containers must be executed on some host platform. A single host platform should be able to run many containers simultaneously, each in their isolated environment.
 
+## The Linux container specification uses various kernel features like namespaces, cgroups, capabilities, LSM, and filesystem jails to fulfill the spec.
+
 
 ## Cgroups
+
+Also known as cgroups, they are used to restrict resource usage for a container and handle device access. cgroups provide controls (through controllers) to restrict cpu, memory, IO, pids, network and RDMA resources for the container. For more information, see the kernel cgroups documentation.
+
 В современных дистрибутивах управление контрольными группами реализовано через systemd, однако сохраняется возможность управления при помощи библиотеки libcgroup и утилиты cgconfig.
 
-  * > blkio
-  * > cpu
-  * > cpuacct
-  * > cpuset
-  * > devices
-  * > freezer
-  * > memory
-  * > net_cls
-  * > perf_event
-  * > hugetlb
+  * `blkio`
+  * `cpu`
+  * `cpuacct`
+  * `cpuset`
+  * `devices`
+  * `freezer`
+  * `memory`
+  * `net_cls`
+  * `perf_event`
+  * `hugetlb`
 
 ## Linux Namespaces
 
-  * > PID, Process ID
-  * > NET, Networking
-  * > PC, InterProcess Communication
-  * > MNT, Mount
-  * > UTS, Unix Timesharing System
+https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md
+
+type are supported:
+
+  * `PID, Process ID` - processes inside the container will only be able to see other processes inside the same container or inside the same pid namespace
+  * `NET, Networking`  - the container will have its own network stack 
+  * `IPC, InterProcess Communication` - processes inside the conatiner will only be able to communicate to other processes inside the same container via system level IPC
+  * `MNT, Mount` - the container will have an isolated mount table
+  * `UTS, Unix Timesharing System` - the container will be able to have its own hostname and domain name
+  * `USER` - the conatiner will be able to remap user and group IDs from the host to local users and groups within the container
+  * `CGROUP` - the container will have an isolated view of the cgroup hierarchy
+
+path - namespace file
 
 ## Capabilities
 
   * man 7 capabilities
+  
+## Take a look
+
+So, if you define a container as a process with resource constraints, Linux security constraints, and namespaces, by definition every process on a Linux system is in a container. This is why we often say __Linux is containers, containers are Linux__
+
+Path | Descriptions
+--- | ---
+/proc/PID/cgroup | that the process is in cgroup
+/proc/PID/status | you see capabilities
+/proc/self/attr/current | SELinux labels
+/proc/PID/ns | the list of namespaces the process is in
+
+  
+  
 
 ## Waht is a container?
 
