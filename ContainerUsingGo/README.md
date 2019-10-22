@@ -1,5 +1,7 @@
 ## Build Your Container Using Go
 
+http://jpetazzo.github.io/2016/09/09/go-docker/
+
 https://developers.redhat.com/articles/go-container/
 
 ### Let's Build And Run
@@ -40,4 +42,30 @@ $ docker tag sergeyglad/simple-webserver registry-host:5000/myname/rest-api-gori
 
 $ docker push registry-host:5000/myname/rest-api-gorilla:1.0
 ```
- 
+
+Create a new image from a container's changes that we just run 
+```sh
+$ docker commit --change="EXPOSE 80" $(docker ps -lq) rest-api-gorilla:2.0
+```
+docker ps -lq output the ID of the last container that was executed
+
+### The scratch image
+```sh
+$ cat <<EOF > Dockerfile
+FROM scratch
+COPY ./hello /hello
+ENTRYPOINT ["/hello"]
+EOF
+
+docker build -t scratch-hello .
+```
+
+### Installing the SSL certificates
+```sh
+$ cat <<EOF > Dockerfile
+FROM alpine:3.4
+RUN apk add --no-cache ca-certificates apache2-utils
+```
+
+
+
