@@ -25,44 +25,6 @@ One of the best examples of recognizable container software is Docker.
 
 ## The Linux container specification uses various kernel features like namespaces, cgroups, capabilities, LSM, and filesystem jails to fulfill the spec.
 
-
-## Cgroups
-
-Also known as cgroups, they are used to restrict resource usage for a container and handle device access. cgroups provide controls (through controllers) to restrict cpu, memory, IO, pids, network and RDMA resources for the container. For more information, see the kernel cgroups documentation.
-
-В современных дистрибутивах управление контрольными группами реализовано через systemd, однако сохраняется возможность управления при помощи библиотеки libcgroup и утилиты cgconfig.
-
-  * `blkio`
-  * `cpu`
-  * `cpuacct`
-  * `cpuset`
-  * `devices`
-  * `freezer`
-  * `memory`
-  * `net_cls`
-  * `perf_event`
-  * `hugetlb`
-
-## Linux Namespaces
-
-https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md
-
-type are supported:
-
-  * `PID, Process ID` - processes inside the container will only be able to see other processes inside the same container or inside the same pid namespace
-  * `NET, Networking`  - the container will have its own network stack 
-  * `IPC, InterProcess Communication` - processes inside the conatiner will only be able to communicate to other processes inside the same container via system level IPC
-  * `MNT, Mount` - the container will have an isolated mount table
-  * `UTS, Unix Timesharing System` - the container will be able to have its own hostname and domain name
-  * `USER` - the conatiner will be able to remap user and group IDs from the host to local users and groups within the container
-  * `CGROUP` - the container will have an isolated view of the cgroup hierarchy
-
-path - namespace file
-
-## Capabilities
-
-  * man 7 capabilities
-  
 ## Take a look
 
 So, if you define a container as a process with resource constraints, Linux security constraints, and namespaces, by definition every process on a Linux system is in a container. This is why we often say __Linux is containers, containers are Linux__
@@ -74,10 +36,7 @@ Path | Descriptions
 /proc/self/attr/current | SELinux labels
 /proc/PID/ns | the list of namespaces the process is in
 
-  
-  
-
-## Waht is a container?
+## What is a container?
 
 #### Processes
 
@@ -96,15 +55,47 @@ Path | Descriptions
  ###### $ DBPID=$(pgrep redis-server)
  ###### $ ls /proc/$DBPID
  ###### $ cat /proc/$DBPID/environ
+## Linux Namespaces
 
-#### Namespaces
+Restricting visibility
 
 One of the fundamental parts of a container is namespaces. The concept of namespaces is to limit what processes can see and access certain parts of the system, such as other network interfaces or processes.
 
  List all the namespaces with:
  ###### ls -lha /proc/$DBPID/ns/
 
-#### Cgroup (Control Groups)
+https://github.com/opencontainers/runtime-spec/blob/master/config-linux.md
+
+type are supported:
+
+  * `PID, Process ID` - processes inside the container will only be able to see other processes inside the same container or inside the same pid namespace
+  * `NET, Networking`  - the container will have its own network stack 
+  * `IPC, InterProcess Communication` - processes inside the conatiner will only be able to communicate to other processes inside the same container via system level IPC
+  * `MNT, Mount` - the container will have an isolated mount table
+  * `UTS, Unix Timesharing System` - the container will be able to have its own hostname and domain name
+  * `USER` - the conatiner will be able to remap user and group IDs from the host to local users and groups within the container
+  * `CGROUP` - the container will have an isolated view of the cgroup hierarchy
+
+path - namespace file
+
+## Cgroups (Control Groups)
+
+Restricting usage
+
+Also known as cgroups, they are used to restrict resource usage for a container and handle device access. cgroups provide controls (through controllers) to restrict cpu, memory, IO, pids, network and RDMA resources for the container. For more information, see the kernel cgroups documentation.
+
+В современных дистрибутивах управление контрольными группами реализовано через systemd, однако сохраняется возможность управления при помощи библиотеки libcgroup и утилиты cgconfig.
+
+  * `blkio`
+  * `cpu`
+  * `cpuacct`
+  * `cpuset`
+  * `devices`
+  * `freezer`
+  * `memory`
+  * `net_cls`
+  * `perf_event`
+  * `hugetlb`
 
 CGroups limit the amount of resources a process can consume. These cgroups are values defined in particular files within the /proc directory.
 
@@ -119,8 +110,27 @@ CGroups limit the amount of resources a process can consume. These cgroups are v
  
  ###### $ docker stats $DBPID --no-stream { view metrics }
  
-#### Capabilities
+ ### Setting up a limit with the memory cgroup
 
+Create a new memory cgroup:
+```
+$ CG=/sys/fs/cgroup/memory/onehundredmegs
+$ sudo mkdir $CG
+```
+Limit it approximately 100 MB of memory usage:
+```
+$ sudo tee $CG/memory.memsw.limit_in_bytes <<< 100000000
+```
+Move the current process to that cgroup:
+```
+$ sudo tee $CG/tasks <<< $$
+```
+The current process and all its future children are now limited.
+ 
+## Capabilities
+
+  * man 7 capabilities
+  
 Capabilities are grouping about what a process or user has permission to do.
  
  ###### $ cat /proc/$DBPID/status | grep ^Cap
@@ -138,21 +148,6 @@ Chroot provides the ability for a process to start with a different root directo
  https://www.katacoda.com/courses/containers-without-docker/what-is-a-container
 Docker
 
-## Setting up a limit with the memory cgroup
 
-Create a new memory cgroup:
-```
-$ CG=/sys/fs/cgroup/memory/onehundredmegs
-$ sudo mkdir $CG
-```
-Limit it approximately 100 MB of memory usage:
-```
-$ sudo tee $CG/memory.memsw.limit_in_bytes <<< 100000000
-```
-Move the current process to that cgroup:
-```
-$ sudo tee $CG/tasks <<< $$
-```
-The current process and all its future children are now limited.
 
 
