@@ -86,16 +86,19 @@ Also known as cgroups, they are used to restrict resource usage for a container 
 
 В современных дистрибутивах управление контрольными группами реализовано через systemd, однако сохраняется возможность управления при помощи библиотеки libcgroup и утилиты cgconfig.
 
-  * `blkio`
-  * `cpu`
-  * `cpuacct`
-  * `cpuset`
-  * `devices`
-  * `freezer`
-  * `memory`
-  * `net_cls`
-  * `perf_event`
-  * `hugetlb`
+__Available Controllers in Red Hat Enterprise Linux 7__
+
+ * `blkio` — sets limits on input/output access to and from block devices;
+ * `cpu` — uses the CPU scheduler to provide cgroup tasks access to the CPU. It is mounted together with the cpuacct controller on the same mount;
+ * `cpuacct` — creates automatic reports on CPU resources used by tasks in a cgroup. It is mounted together with the cpu controller on the same mount;
+ * `cpuset` — assigns individual CPUs (on a multicore system) and memory nodes to tasks in a cgroup;
+ * `devices` — allows or denies access to devices for tasks in a cgroup;
+ * `freezer` — suspends or resumes tasks in a cgroup;
+ * `memory` — sets limits on memory use by tasks in a cgroup and generates automatic reports on memory resources used by those tasks;
+ * `net_cls` — tags network packets with a class identifier (classid) that allows the Linux traffic controller (the tc command) to identify packets originating from a particular cgroup task. A subsystem of net_cls, the net_filter (iptables) can also use this tag to perform actions on such packets. The net_filter tags network sockets with a firewall identifier (fwid) that allows the Linux firewall (the iptables command) to identify packets (skb->sk) originating from a particular cgroup task;
+ * `perf_event` — enables monitoring cgroups with the perf tool;
+ * `hugetlb` — allows to use virtual memory pages of large sizes and to enforce resource limits on these pages.
+  
 
 CGroups limit the amount of resources a process can consume. These cgroups are values defined in particular files within the /proc directory.
 
