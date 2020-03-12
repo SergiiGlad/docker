@@ -33,3 +33,46 @@ By default, Docker works as an isolated single-node. All containers are only dep
 ## Your first Stack
 
 A stack is a collection of services that are related and usually work together for an application.
+
+## Analyzing Docker Container Performance With Native Tools
+
+https://crate.io/a/analyzing-docker-container-performance-native-tools/
+
+### docker stats
+
+```
+$ docker stats
+```
+
+### REST API
+
+Like docker stats, the REST API continuously reports a live stream of CPU, memory, and I/O data. However, the API provides longer, live-streaming chunks of JSON, with metrics about the container.
+
+```
+$ curl -v --unix-socket /var/run/docker.sock \
+  http://localhost/containers/CONTAINER_ID/stats
+```  
+
+### cgroups Pseudo Files
+
+cgroups pseudo files are the fastest way to read metrics from Docker containers.
+
+``` $ export CONTAINER_ID=$(docker inspect --format="{{.Id}}" CONTAINER_NAME)```
+
+You can find the memory metrics in the memory.stat file
+CPU metrics are contained in the cpuacct.stat file
+```
+$ cd /sys/fs/cgroup/memory/docker/$CONTAINER_ID
+$ cat memory.stat
+```
+
+Since each container has a virtual ethernet interface, Docker lets you directly check the TX (transmit) and RX (receive) counters for this interface from inside the container.
+
+```$ cat /proc/$CONTAINER_PID/net/dev```
+
+### Wrap Up
+
+* The docker stats command is good for small scale use, with a few containers running on a single host.
+* The Docker REST API is good when you have multiple containers running on multiple hosts, and you'd like to retrieve the stats remotely.
+* The cgroups pseudo files are the fastest and most efficient way to get stats, and are suitable for for large setups where performance is important.
+
