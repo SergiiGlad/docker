@@ -72,7 +72,7 @@ Since each container has a virtual ethernet interface, Docker lets you directly 
 
 ### Wrap Up
 
-* The docker stats command is good for small scale use, with a few containers running on a single host.
-* The Docker REST API is good when you have multiple containers running on multiple hosts, and you'd like to retrieve the stats remotely.
-* The cgroups pseudo files are the fastest and most efficient way to get stats, and are suitable for for large setups where performance is important.
+* The ```docker stats``` command is good for small scale use, with a few containers running on a single host.
+* The __Docker REST API__ is good when you have multiple containers running on multiple hosts, and you'd like to retrieve the stats remotely.
+* The __cgroups pseudo files__ are the fastest and most efficient way to get stats, and are suitable for for large setups where performance is important.
 
