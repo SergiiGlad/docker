@@ -106,6 +106,21 @@ $ docker run volume-in-build
 cat: can't open '/data/myfile.txt': No such file or directory
 ```
 
+###  A common example of this is updating the local package index and installing packages in two separate steps. 
+```
+FROM ubuntu:18.04
+RUN apt -y update
+RUN apt -y install nginx php-fpm
+```
+
+We’ve added a second package to the installation command run by the
+second instruction. If a significant amount of time has passed since the
+previous image build, the new build might fail. That’s because the package
+index update instruction (RUN apt -y update) has not changed, so
+Docker reuses the image layer associated with that instruction. Since we
+are using an old package index, the version of the php-fpm package we
+have in our local records may no longer be in the repositories, resulting in
+an error when the second instruction is run
 
 from https://runnable.com
 
