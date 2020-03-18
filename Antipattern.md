@@ -122,6 +122,14 @@ are using an old package index, the version of the php-fpm package we
 have in our local records may no longer be in the repositories, resulting in
 an error when the second instruction is run
 
+__Package installation example Dockerfile__
+```
+FROM ubuntu:18.04
+RUN apt -y update && apt -y install nginx php-fpm
+```
+
+
+
 from https://runnable.com
 
 
